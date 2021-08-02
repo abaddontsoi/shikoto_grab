@@ -1,3 +1,4 @@
+import os
 import requests
 from bs4 import BeautifulSoup
 from scraper import get_page
@@ -15,6 +16,9 @@ num = input()
 
 print("Enter file name below: ")
 file_name = input()
+
+if not os.path.exists(file_name):
+    os.mkdir(file_name)
 
 for ticks in range(int(num)):
 
@@ -54,8 +58,11 @@ for ticks in range(int(num)):
 
     fr.close()
 
+    path = file_name + '_' + str(ticks) + '.txt'
 
-    with open(file_name + str(ticks) + '.txt', 'w', encoding='utf-8') as f:
+    final_path = os.path.join(file_name, path)
+
+    with open(final_path, 'w', encoding='utf-8') as f:
 
         f.write(raw_text)
         f.close()
